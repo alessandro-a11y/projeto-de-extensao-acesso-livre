@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Plataforma inclusiva para tradução e acessibilidade digital." />
+  <title>ACESSO LIVRE</title>
+  <link rel="stylesheet" href="css/traducao.css" />
+  <script src="js/traducao.js" defer></script>
+</head>
+
+<body>
+  <header>
+    <h1>ACESSO LIVRE</h1>
+    <img src="./images/Logo Acesso Livre Moderno.png" alt="Logo do Acesso Livre" />
+  </header>
+
+  <main>
+    <!-- BANNER -->
+    <section id="inicio" class="banner">
+      <h2>Conectando pessoas com diferentes formas de comunicação</h2>
+    </section>
+
+    <!-- ÁREA DE TRADUÇÃO -->
+    <section id="traducao" class="traducao">
+      <h2>Área de Tradução</h2>
+
+      <textarea id="textoParaTraduzir" placeholder="Digite seu texto aqui..."></textarea>
+
+      <div id="areaLibras" class="painel-libras"></div>
+
+      <div class="botoes">
+        <button onclick="traduzirTexto()">🔄 Traduzir para Libras</button>
+        <button id="btnAcessibilidade" onclick="alternarAcessibilidade()">🌗 Alto Contraste</button>
+        <button onclick="document.body.classList.toggle('fonte-grande')">🔠 Aumentar Fonte</button>
+        <button onclick="falarTexto()">🔊 Ouvir Texto</button>
+        <button onclick="iniciarReconhecimento()">🎙️ Falar para Converter</button>
+        <button onclick="document.getElementById('textoParaTraduzir').value=''">🧹 Limpar</button>
+      </div>
+    </section>
+
+    <!-- INFO / MISSÃO / OBJETIVO / DEPOIMENTOS -->
+    <section class="info">
+
+      <div class="card">
+        <h3>🔄 Como funciona</h3>
+        <p>Conecte palavras, vozes e gestos com uma experiência inclusiva e fácil de usar.</p>
+      </div>
+
+      <div class="card">
+        <h3>🌍 Missão</h3>
+        <p>Criar pontes entre pessoas, valorizando a diversidade e garantindo o direito à comunicação.</p>
+      </div>
+
+      <div class="card">
+        <h3>🗣️ Depoimentos</h3>
+
+        <form id="formDepoimento" class="form-depoimento">
+          <textarea id="inputDepoimento" placeholder="Compartilhe sua experiência..." required></textarea>
+
+          <input 
+            type="text" 
+            id="nomeDepoimento" 
+            placeholder="Seu nome..."
+            required
+            class="input-nome"
+          />
+
+          <button type="submit">Enviar Depoimento</button>
+        </form>
+
+        <div id="listaDepoimentos"></div>
+      </div>
+
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 ACESSO LIVRE</p>
+    <a href="#inicio">⬆️ Voltar ao topo</a>
+  </footer>
+
+  <!-- VLibras -->
+  <div vw class="enabled">
+    <div vw-access-button class="active"></div>
+    <div vw-plugin-wrapper>
+      <div class="vw-plugin-top-wrapper"></div>
+    </div>
+  </div>
+
+  <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+  <script>
+    new window.VLibras.Widget('https://vlibras.gov.br/app');
+  </script>
+</body>
+</html>
