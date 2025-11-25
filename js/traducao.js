@@ -165,7 +165,8 @@ function falarTexto() {
 }
 
 function iniciarReconhecimento() {
-  falarTexto(); // Iniciar reconhecimento, mas o nome da função deve ser iniciada aqui se não tiver botão parar
+  // CORRIGIDO: Agora chama a função de reconhecimento de voz e direciona para o campo de texto.
+  iniciarSpeechRecognition(textoParaTraduzir);
 }
 
 function reconhecerDepoimento() {
