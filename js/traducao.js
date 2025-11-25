@@ -17,7 +17,7 @@ let isRecognizing = false;
 let currentRecognition = null;
 let utteranceAtiva = null;
 const FONT_STEP = 0.1;
-const MAX_FONT_SCALE = 1.2;
+const MAX_FONT_SCALE = 2.0;
 const MIN_FONT_SCALE = 1.0;
 
 let fonteAumentada = false;
