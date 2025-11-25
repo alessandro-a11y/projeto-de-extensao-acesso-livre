@@ -23,17 +23,23 @@
     <section id="traducao" class="traducao">
       <h2>Área de Tradução</h2>
 
-      <textarea id="textoParaTraduzir" placeholder="Digite seu texto aqui..."></textarea>
+      <textarea id="textoParaTraduzir" class="area-texto-padrao" placeholder="Digite seu texto aqui..."></textarea>
 
-      <div id="areaLibras" class="painel-libras"></div>
+      <div id="campoLibrasVisual" class="area-texto-padrao">
+      </div>
+
+      <div id="statusVoz" style="text-align:center; color:#4caf50; font-weight:bold; margin:10px 0; font-size:14px;">
+      </div>
 
       <div class="botoes">
         <button id="btnTraduzir" onclick="traduzirTexto()">🔄 Traduzir para Libras</button>
         <button id="btnAcessibilidade" onclick="alternarAcessibilidade()">🌗 Alto Contraste</button>
-        <button id="btnFonte" onclick="document.body.classList.toggle('fonte-grande')">🔠 Aumentar Fonte</button>
+
+        <button id="btnAlternarFonte" onclick="alternarTamanhoFonte()">🔠 Aumentar Fonte</button>
+
         <button id="btnOuvir" onclick="falarTexto()">🔊 Ouvir Texto</button>
         <button id="btnFalar" onclick="iniciarReconhecimento()">🎙️ Falar para Converter</button>
-        <button id="btnLimpar" onclick="document.getElementById('textoParaTraduzir').value=''">🧹 Limpar</button>
+        <button id="btnLimpar" onclick="limparTextoArea()">🧹 Limpar</button>
       </div>
     </section>
 

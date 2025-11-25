@@ -1,221 +1,243 @@
 :root {
- --primary-color: #43B5C5;
- --secondary-color: #7DC9E7;
- --accent-color: #A9DCD9;
- --text-color: #2E2E2E;
- --background-color: #FAFAF7;
+    --primary-color: #43B5C5;
+    --secondary-color: #7DC9E7;
+    --accent-color: #A9DCD9;
+    --text-color: #2E2E2E;
+    --background-color: #FAFAF7;
+    --font-scale: 1.0;
 }
 
 body {
- font-family: Arial, sans-serif;
- margin: 0;
- padding: 0;
- background: var(--background-color);
- color: var(--text-color);
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: var(--background-color);
+    color: var(--text-color);
+    font-size: calc(1rem * var(--font-scale));
 }
 
 header h1 {
- text-align: center;
- background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
- color: #fff;
- padding: 2rem;
- margin: 0;
- border-radius: 0 0 20px 20px;
+    text-align: center;
+    background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+    color: #fff;
+    padding: 2rem;
+    margin: 0;
+    border-radius: 0 0 20px 20px;
 }
 
 img {
- display: block;
- width: 240px;
- margin: 1rem auto;
+    display: block;
+    width: 240px;
+    margin: 1rem auto;
 }
 
 .banner {
- text-align: center;
- background: var(--accent-color);
- padding: 2rem;
- border-radius: 10px;
- margin: 1rem;
+    text-align: center;
+    background: var(--accent-color);
+    padding: 2rem;
+    border-radius: 10px;
+    margin: 1rem;
 }
 
 .traducao {
- text-align: center;
- padding: 2rem;
+    text-align: center;
+    padding: 2rem;
 }
 
-textarea {
- width: 80%;
- height: 140px;
- padding: 1rem;
- resize: none;
- font-size: 1.2rem;
- border-radius: 10px;
- border: 2px solid var(--secondary-color);
+/* ESTILO UNIFICADO PARA OS DOIS CAMPOS DE TRADUÇÃO */
+.area-texto-padrao {
+    width: 80%;
+    height: 140px;
+    padding: 1rem;
+    resize: vertical;
+    font-size: calc(1.2rem * var(--font-scale));
+    border-radius: 10px;
+    border: 2px solid var(--secondary-color);
+    margin: 1rem auto;
+    display: block;
+    box-sizing: border-box;
+    background: white;
+    text-align: left;
+    font-family: Arial, sans-serif;
 }
 
+/* Ajustes específicos para a DIV de visualização */
+#campoLibrasVisual {
+    overflow-y: auto;
+    font-family: 'Roboto', sans-serif;
+}
+
+/* A classe .painel-libras original, se usada em outro lugar */
 .painel-libras {
- width: 80%;
- min-height: 100px;
- margin: 1.5rem auto;
- padding: 1rem;
- background: white;
- border: 2px solid var(--primary-color);
- border-radius: 10px;
- font-size: 1.3rem;
- text-align: left;
- box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    width: 80%;
+    min-height: 100px;
+    margin: 1.5rem auto;
+    padding: 1rem;
+    background: white;
+    border: 2px solid var(--primary-color);
+    border-radius: 10px;
+    font-size: 1.3rem;
+    text-align: left;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.botoes {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 1rem;
 }
 
 button {
- margin: 1.0rem;
- padding: 0.8rem 1.4rem;
- border: none;
- border-radius: 8px;
- background: var(--primary-color);
- color: white;
- cursor: pointer;
- transition: .3s;
- box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.664);
+    margin: 1.0rem 0.5rem;
+    padding: 0.8rem 1.4rem;
+    border: none;
+    border-radius: 8px;
+    background: var(--primary-color);
+    color: white;
+    cursor: pointer;
+    transition: .3s;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.664);
 }
 
 button:hover {
- transform: scale(1.05);
- background: var(--secondary-color);
+    transform: scale(1.05);
+    background: var(--secondary-color);
 }
 
 .info {
- display: flex;
- justify-content: center;
- gap: 2rem;
- flex-wrap: wrap;
- padding: 2rem;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    padding: 2rem;
 }
 
 .card {
- background: white;
- width: 280px;
- padding: 1.5rem;
- border-radius: 12px;
- box-shadow: 0 3px 10px rgba(0,0,0,0.15);
- transition: .3s;
+    background: white;
+    width: 280px;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+    transition: .3s;
 }
 
 .card:hover {
- transform: translateY(-5px);
+    transform: translateY(-5px);
 }
 
-/* --- AJUSTE FEITO AQUI --- */
 .form-depoimento {
- display: flex;
- flex-direction: column;
- align-items: center;
- gap: 20px; /* Espaçamento aumentado para 20px */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
 }
 
 #inputDepoimento {
- width: 90%;
- height: 90px;
- padding: 1rem;
- resize: vertical;
- border-radius: 10px;
- border: 2px solid var(--accent-color);
+    width: 90%;
+    height: 90px;
+    padding: 1rem;
+    resize: vertical;
+    border-radius: 10px;
+    border: 2px solid var(--accent-color);
+    font-family: Arial, sans-serif;
 }
-
 .input-nome {
- width: 90%;
- padding: .8rem;
- border-radius: 8px;
- border: 1px solid var(--secondary-color);
+    width: 90%;
+    padding: .8rem;
+    border-radius: 8px;
+    border: 1px solid var(--secondary-color);
 }
 
 .form-depoimento button {
- width: 90%;
- margin: 0;
+    width: 90%;
+    margin: 0;
 }
 
 #listaDepoimentos {
- margin-top: 1.5rem;
- padding: 0 10px;
- width: 100%;
+    margin-top: 1.5rem;
+    padding: 0 10px;
+    width: 100%;
 }
 
 .depoimento-item {
- background-color: var(--secondary-color);
- color: var(--text-color);
- padding: 12px 15px;
- border-radius: 20px 20px 20px 4px;
- margin-bottom: 15px;
- box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    padding: 12px 15px;
+    border-radius: 20px 20px 20px 4px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .depoimento-meta {
- display: block;
- font-size: 0.9rem;
- font-weight: bold;
- margin-bottom: 4px;
- color: #1a5e73;
+    display: block;
+    font-size: 0.9rem;
+    font-weight: bold;
+    margin-bottom: 4px;
+    color: #1a5e73;
 }
 
 body.alto-contraste {
- background: black;
- color: yellow;
+    background: black;
+    color: yellow;
 }
 
+/* Adaptação para o Alto Contraste */
 body.alto-contraste .card,
-body.alto-contraste textarea,
-body.alto-contraste .painel-libras {
- background: #444;
- color: yellow;
- border-color: yellow;
-}
-
-body.fonte-grande {
- font-size: 2rem;
+body.alto-contraste .area-texto-padrao,
+body.alto-contraste #inputDepoimento {
+    background: #444;
+    color: yellow;
+    border-color: yellow;
 }
 
 footer {
- background: linear-gradient(90deg, rgba(67,181,197,0.08), rgba(169,220,217,0.04));
- padding: 18px 12px;
- text-align: center;
- margin-top: 40px;
- border-top: 1px solid rgba(0,0,0,0.05);
- color: #0b2b2f;
- font-weight: 600;
- box-shadow: inset 0 1px 0 rgba(255,255,255,0.6);
- border-radius: 12px 12px 0 0;
+    background: linear-gradient(90deg, rgba(67, 181, 197, 0.08), rgba(169, 220, 217, 0.04));
+    padding: 18px 12px;
+    text-align: center;
+    margin-top: 40px;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    color: #0b2b2f;
+    font-weight: 600;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
+    border-radius: 12px 12px 0 0;
 }
 
 footer p {
- margin: 0 0 6px 0;
- font-size: 0.95rem;
- color: #0b2b2f;
+    margin: 0 0 6px 0;
+    font-size: 0.95rem;
+    color: #0b2b2f;
 }
 
 footer a {
- display: inline-block;
- text-decoration: none;
- color: var(--primary-color);
- background: transparent;
- padding: 6px 10px;
- border-radius: 8px;
- transition: var(--background-black ) .18s, transform .18s;
- font-weight: 600;
+    display: inline-block;
+    text-decoration: none;
+    color: var(--primary-color);
+    background: transparent;
+    padding: 6px 10px;
+    border-radius: 8px;
+    transition: .18s, transform .18s;
+    font-weight: 600;
 }
 
 footer a:hover,
 footer a:focus {
- background: rgba(67,181,197,0.12);
- transform: translateY(-2px);
- outline: none;
+    background: rgba(67, 181, 197, 0.12);
+    transform: translateY(-2px);
+    outline: none;
 }
 
 @media (max-width: 520px) {
- footer {
-  padding: 14px 10px;
- }
- footer p { font-size: 0.9rem; }
- footer a { padding: 6px 8px; font-size: 0.95rem; }
+    footer {
+        padding: 14px 10px;
+    }
 
- body.fonte-grande {
- font-size: 2rem;
-}
+    footer p {
+        font-size: 0.9rem;
+    }
+
+    footer a {
+        padding: 6px 8px;
+        font-size: 0.95rem;
+    }
 }
