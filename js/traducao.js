@@ -1,166 +1,114 @@
-function falarTexto() {
-  const texto = document.getElementById("textoParaTraduzir").value;
-  if (texto === "") {
-    alert("Digite algo para ser falado!");
-    return;
-  }
-  const fala = new SpeechSynthesisUtterance(texto);
-  fala.lang = "pt-BR";
-  speechSynthesis.speak(fala);
+
+const API_URL = 'https://projeto-de-extensao-acesso-livre-backend.onrender.com'; 
+const listaDepoimentos = document.getElementById('listaDepoimentos');
+
+
+
+function criarDepoimentoElemento(depoimento) {
+    const div = document.createElement('div');
+    div.classList.add('depoimento-item');
+
+    const dataObj = new Date(depoimento.data);
+    const dataFormatada = dataObj.toLocaleDateString('pt-BR', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric'
+    });
+    const horaFormatada = dataObj.toLocaleTimeString('pt-BR', {
+        hour: '2-digit',
+        minute: '2-digit'
+    });
+    
+    const htmlContent = `
+        <strong>${depoimento.nome}</strong> — ${dataFormatada} · ${horaFormatada}
+        <p>${depoimento.texto}</p>
+    `;
+
+    div.innerHTML = htmlContent;
+    return div;
 }
 
-function iniciarReconhecimento() {
-  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-  if (!SpeechRecognition) {
-    alert("Seu navegador não suporta o Reconhecimento de Voz.");
-    return;
-  }
-  const rec = new SpeechRecognition();
-  rec.lang = "pt-BR";
-  rec.interimResults = false;
-  rec.maxAlternatives = 1;
 
-  rec.onresult = (event) => {
-    const texto = event.results[0][0].transcript;
-    document.getElementById("textoParaTraduzir").value = texto;
-  };
-
-  rec.onerror = (event) => {
-    console.error('Erro de reconhecimento de voz: ', event.error);
-  };
-
-  rec.start();
-}
-
-function reconhecerDepoimento() {
-  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-  if (!SpeechRecognition) {
-    alert("Seu navegador não suporta o Reconhecimento de Voz.");
-    return;
-  }
-  const rec = new SpeechRecognition();
-  rec.lang = "pt-BR";
-  rec.interimResults = false;
-  rec.maxAlternatives = 1;
-
-  rec.onresult = (event) => {
-    const texto = event.results[0][0].transcript;
-    document.getElementById("inputDepoimento").value = texto;
-  };
-
-  rec.onerror = (event) => {
-    console.error('Erro de reconhecimento de voz: ', event.error);
-  };
-
-  rec.start();
-}
-
-function traduzirTexto() {
-  const texto = document.getElementById("textoParaTraduzir").value.trim();
-  const painel = document.getElementById("areaLibras");
-
-  if (texto === "") {
-    alert("Digite algo para traduzir!");
-    return;
-  }
-
-  painel.textContent = texto;
-  painel.dispatchEvent(new Event("DOMSubtreeModified", { bubbles: true }));
-}
-
-function alternarAcessibilidade() {
-  document.body.classList.toggle("alto-contraste");
-}
 
 async function carregarDepoimentos() {
-  const lista = document.getElementById("listaDepoimentos");
-  lista.innerHTML = "";
-
-  try {
-    const response = await fetch('https://projeto-de-extensao-acesso-livre-backend.onrender.com/api/depoimentos');
-    if (!response.ok) {
-      lista.innerHTML = "<p class='depoimento-item'>Erro ao carregar depoimentos do servidor.</p>";
-      return;
+    if (listaDepoimentos) {
+        listaDepoimentos.innerHTML = '';
+    } else {
+        return;
     }
 
-    const dados = await response.json();
+    try {
+        const response = await fetch(`${API_URL}/api/depoimentos`);
+        
+        if (!response.ok) {
+            throw new Error(`Erro HTTP: ${response.status}`);
+        }
 
-    dados.forEach(dep => {
-      const div = document.createElement("div");
-      div.className = "depoimento-item";
+        const depoimentos = await response.json();
+        
+        depoimentos.forEach(depoimento => {
+            const elemento = criarDepoimentoElemento(depoimento);
+            listaDepoimentos.appendChild(elemento);
+        });
 
-      const meta = document.createElement("span");
-      meta.className = "depoimento-meta";
-
-      let dataFormatada = 'Data Inválida';
-      const dataObj = new Date(dep.data);
-
-      if (dataObj instanceof Date && !isNaN(dataObj)) {
-        dataFormatada = dataObj.toLocaleDateString("pt-BR") +
-          " · " +
-          dataObj.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" });
-      }
-
-      meta.textContent = `${dep.nome} — ${dataFormatada}`;
-      div.appendChild(meta);
-
-      const textoDepoimento = document.createTextNode(dep.texto);
-      div.appendChild(textoDepoimento);
-
-      lista.appendChild(div);
-    });
-  } catch (error) {
-    lista.innerHTML = `<p class='depoimento-item'>Erro de conexão: O servidor API não está ativo.</p>`;
-  }
+    } catch (error) {
+        listaDepoimentos.innerHTML = `<p class="depoimento-item">Erro ao carregar depoimentos do servidor.</p>`;
+    }
 }
 
 async function salvarDepoimento(nome, texto) {
-  const response = await fetch('http://localhost:3000/api/depoimentos', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ nome, texto })
-  });
-
-  if (!response.ok) {
-    throw new Error('Falha ao enviar depoimento para o servidor. Código: ' + response.status);
-  }
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-  const form = document.getElementById("formDepoimento");
-
-  if (form) {
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
-
-      const nome = document.getElementById("nomeDepoimento").value.trim();
-      const texto = document.getElementById("inputDepoimento").value.trim();
-
-      if (nome.length < 2) {
-        alert("Digite um nome válido!");
+    if (!nome || !texto) {
+        alert('Por favor, preencha o nome e o texto do depoimento.');
         return;
-      }
+    }
 
-      if (texto.length < 8) {
-        alert("Depoimento muito curto!");
-        return;
-      }
+    try {
+        const response = await fetch(`${API_URL}/api/depoimentos`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ nome, texto })
+        });
+        
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.error || `Erro HTTP: ${response.status}`);
+        }
 
-      try {
-        await salvarDepoimento(nome, texto);
+       
+        document.getElementById('inputDepoimento').value = ''; 
+        document.getElementById('nomeDepoimento').value = ''; 
+        alert('Depoimento enviado com sucesso!');
+
         await carregarDepoimentos();
 
-        document.getElementById("inputDepoimento").value = "";
-        document.getElementById("nomeDepoimento").value = "";
+    } catch (error) {
+        alert(`Erro ao salvar depoimento. Detalhe: ${error.message}.`);
+    }
+}
 
-        alert("Depoimento enviado com sucesso e salvo no servidor!");
-      } catch (error) {
-        alert("Erro ao salvar depoimento: Verifique se o servidor está ativo. Detalhe: " + error.message);
-      }
-    });
-  }
 
-  carregarDepoimentos();
+
+document.addEventListener('DOMContentLoaded', () => {
+
+    const btnEnviar = document.getElementById('btnEnviarDepoimento'); 
+    
+    if (btnEnviar) {
+        btnEnviar.addEventListener('click', () => {
+ 
+            const nome = document.getElementById('nomeDepoimento').value; 
+            const texto = document.getElementById('inputDepoimento').value; 
+            salvarDepoimento(nome, texto);
+        });
+    }
+
+    carregarDepoimentos();
 });
+
+
+function enviarDepoimento() {
+    const nome = document.getElementById('nomeDepoimento').value;
+    const texto = document.getElementById('inputDepoimento').value;
+    salvarDepoimento(nome, texto);
+}
