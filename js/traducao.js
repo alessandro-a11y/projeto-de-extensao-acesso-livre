@@ -165,7 +165,6 @@ function falarTexto() {
 }
 
 function iniciarReconhecimento() {
-  // CORRIGIDO: Agora chama a função de reconhecimento de voz e direciona para o campo de texto.
   iniciarSpeechRecognition(textoParaTraduzir);
 }
 
@@ -194,8 +193,11 @@ function traduzirTexto() {
 
   if (campoLibrasVisual) {
     campoLibrasVisual.textContent = texto;
-    mostrarStatus("", false);
   }
+
+  alert("Função 'Traduzir para Libras' ativa. Use o VLibras flutuante para traduzir!");
+
+  mostrarStatus("✅ Texto pronto para sinalização. Use o VLibras!", false);
 
   console.log("Tradução para Libras acionada. Texto: " + texto);
 }
@@ -279,7 +281,7 @@ async function carregarDepoimentos() {
       return;
     }
 
-    depoimentos.reverse().forEach(depoimento => {
+    depoimentos.forEach(depoimento => {
       const elemento = criarDepoimentoElemento(depoimento);
       listaDepoimentos.appendChild(elemento);
     });
