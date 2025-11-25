@@ -77,7 +77,7 @@ async function carregarDepoimentos() {
   lista.innerHTML = "";
 
   try {
-    const response = await fetch('http://localhost:3000/api/depoimentos');
+    const response = await fetch('https://projeto-de-extensao-acesso-livre-backend.onrender.com/api/depoimentos');
     if (!response.ok) {
       lista.innerHTML = "<p class='depoimento-item'>Erro ao carregar depoimentos do servidor.</p>";
       return;
