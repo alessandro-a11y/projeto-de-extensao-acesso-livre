@@ -1,8 +1,43 @@
-
 const API_URL = 'https://projeto-de-extensao-acesso-livre-backend.onrender.com'; 
 const listaDepoimentos = document.getElementById('listaDepoimentos');
+const textoParaTraduzir = document.getElementById('textoParaTraduzir');
 
+function traduzirTexto() {
+    alert("Função 'Traduzir para Libras' chamada. Implemente a lógica de tradução!");
+    console.log("Ação: Traduzindo texto para Libras.");
+}
 
+function alternarAcessibilidade() {
+    document.body.classList.toggle('alto-contraste');
+    console.log("Ação: Alternando alto contraste.");
+}
+
+function falarTexto() {
+    if ('speechSynthesis' in window && textoParaTraduzir.value) {
+        const utterance = new SpeechSynthesisUtterance(textoParaTraduzir.value);
+        window.speechSynthesis.speak(utterance);
+        console.log("Ação: Iniciando síntese de voz (TTS).");
+    } else if (!textoParaTraduzir.value) {
+        alert("Por favor, digite algum texto para ouvir.");
+    } else {
+        alert("Seu navegador não suporta síntese de voz (TTS).");
+    }
+}
+
+function iniciarReconhecimento() {
+    alert("Função 'Falar para Converter' chamada. Implemente o reconhecimento de voz (Web Speech API)!");
+    console.log("Ação: Iniciando reconhecimento de voz para tradução.");
+}
+
+function reconhecerDepoimento() {
+    alert("Função 'Falar para Depoimento' chamada. Implemente o reconhecimento de voz!");
+    console.log("Ação: Iniciando reconhecimento de voz para o depoimento.");
+}
+
+function limparTextoArea() {
+    textoParaTraduzir.value = '';
+    console.log("Ação: Limpando área de texto principal.");
+}
 
 function criarDepoimentoElemento(depoimento) {
     const div = document.createElement('div');
@@ -27,8 +62,6 @@ function criarDepoimentoElemento(depoimento) {
     div.innerHTML = htmlContent;
     return div;
 }
-
-
 
 async function carregarDepoimentos() {
     if (listaDepoimentos) {
@@ -76,7 +109,6 @@ async function salvarDepoimento(nome, texto) {
             throw new Error(errorData.error || `Erro HTTP: ${response.status}`);
         }
 
-       
         document.getElementById('inputDepoimento').value = ''; 
         document.getElementById('nomeDepoimento').value = ''; 
         alert('Depoimento enviado com sucesso!');
@@ -88,24 +120,24 @@ async function salvarDepoimento(nome, texto) {
     }
 }
 
-
-
 document.addEventListener('DOMContentLoaded', () => {
-
     const btnEnviar = document.getElementById('btnEnviarDepoimento'); 
     
     if (btnEnviar) {
         btnEnviar.addEventListener('click', () => {
- 
             const nome = document.getElementById('nomeDepoimento').value; 
             const texto = document.getElementById('inputDepoimento').value; 
             salvarDepoimento(nome, texto);
         });
     }
 
+    const btnLimpar = document.getElementById('btnLimpar');
+    if (btnLimpar && btnLimpar.getAttribute('onclick') === null) {
+        btnLimpar.addEventListener('click', limparTextoArea);
+    }
+    
     carregarDepoimentos();
 });
-
 
 function enviarDepoimento() {
     const nome = document.getElementById('nomeDepoimento').value;
