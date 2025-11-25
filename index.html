@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -15,12 +16,10 @@
   </header>
 
   <main>
-    <!-- BANNER -->
     <section id="inicio" class="banner">
       <h2>Conectando pessoas com diferentes formas de comunicação</h2>
     </section>
 
-    <!-- ÁREA DE TRADUÇÃO -->
     <section id="traducao" class="traducao">
       <h2>Área de Tradução</h2>
 
@@ -38,7 +37,6 @@
       </div>
     </section>
 
-    <!-- INFO / MISSÃO / OBJETIVO / DEPOIMENTOS -->
     <section class="info">
 
       <div class="card">
@@ -54,27 +52,17 @@
       <div class="card">
         <h3>🗣️ Depoimentos</h3>
 
-        <form id="formDepoimento" class="form-depoimento">
+        <div id="containerDepoimento" class="form-depoimento">
 
-          <textarea 
-            id="inputDepoimento" 
-            placeholder="Compartilhe sua experiência..." 
-            required
-          ></textarea>
+          <textarea id="inputDepoimento" placeholder="Compartilhe sua experiência..." required></textarea>
 
-          <input 
-            type="text" 
-            id="nomeDepoimento" 
-            placeholder="Seu nome..."
-            required
-            class="input-nome"
-          />
+          <input type="text" id="nomeDepoimento" placeholder="Seu nome..." required class="input-nome" />
 
-          <!-- BOTÕES CORRIGIDOS -->
           <button type="button" onclick="reconhecerDepoimento()">🎙️ Falar para Depoimento</button>
-          <button type="submit">Enviar Depoimento</button>
 
-        </form>
+          <button type="button" id="btnEnviarDepoimento">Enviar Depoimento</button>
+
+        </div>
 
         <div id="listaDepoimentos"></div>
       </div>
@@ -87,7 +75,6 @@
     <a href="#inicio">⬆️ Voltar ao topo</a>
   </footer>
 
-  <!-- VLibras -->
   <div vw class="enabled">
     <div vw-access-button class="active"></div>
     <div vw-plugin-wrapper>
@@ -100,4 +87,5 @@
     new window.VLibras.Widget('https://vlibras.gov.br/app');
   </script>
 </body>
+
 </html>
