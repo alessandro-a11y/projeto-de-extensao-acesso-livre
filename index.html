@@ -6,7 +6,6 @@
   <meta name="description" content="Plataforma inclusiva para tradução e acessibilidade digital." />
   <title>ACESSO LIVRE</title>
   <link rel="stylesheet" href="css/traducao.css" />
-  <script src="js/traducao.js" defer></script>
 </head>
 
 <body>
@@ -30,12 +29,12 @@
       <div id="areaLibras" class="painel-libras"></div>
 
       <div class="botoes">
-        <button onclick="traduzirTexto()">🔄 Traduzir para Libras</button>
+        <button id="btnTraduzir" onclick="traduzirTexto()">🔄 Traduzir para Libras</button>
         <button id="btnAcessibilidade" onclick="alternarAcessibilidade()">🌗 Alto Contraste</button>
-        <button onclick="document.body.classList.toggle('fonte-grande')">🔠 Aumentar Fonte</button>
-        <button onclick="falarTexto()">🔊 Ouvir Texto</button>
-        <button onclick="iniciarReconhecimento()">🎙️ Falar para Converter</button>
-        <button onclick="document.getElementById('textoParaTraduzir').value=''">🧹 Limpar</button>
+        <button id="btnFonte" onclick="document.body.classList.toggle('fonte-grande')">🔠 Aumentar Fonte</button>
+        <button id="btnOuvir" onclick="falarTexto()">🔊 Ouvir Texto</button>
+        <button id="btnFalar" onclick="iniciarReconhecimento()">🎙️ Falar para Converter</button>
+        <button id="btnLimpar" onclick="document.getElementById('textoParaTraduzir').value=''">🧹 Limpar</button>
       </div>
     </section>
 
@@ -56,7 +55,12 @@
         <h3>🗣️ Depoimentos</h3>
 
         <form id="formDepoimento" class="form-depoimento">
-          <textarea id="inputDepoimento" placeholder="Compartilhe sua experiência..." required></textarea>
+
+          <textarea 
+            id="inputDepoimento" 
+            placeholder="Compartilhe sua experiência..." 
+            required
+          ></textarea>
 
           <input 
             type="text" 
@@ -66,7 +70,10 @@
             class="input-nome"
           />
 
+          <!-- BOTÕES CORRIGIDOS -->
+          <button type="button" onclick="reconhecerDepoimento()">🎙️ Falar para Depoimento</button>
           <button type="submit">Enviar Depoimento</button>
+
         </form>
 
         <div id="listaDepoimentos"></div>
@@ -87,7 +94,7 @@
       <div class="vw-plugin-top-wrapper"></div>
     </div>
   </div>
-
+  <script src="js/traducao.js" defer></script>
   <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
   <script>
     new window.VLibras.Widget('https://vlibras.gov.br/app');
