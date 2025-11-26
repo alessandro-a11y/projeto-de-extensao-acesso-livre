@@ -142,6 +142,7 @@ button:hover {
     border: 2px solid var(--accent-color);
     font-family: Arial, sans-serif;
 }
+
 .input-nome {
     width: 90%;
     padding: .8rem;
@@ -154,10 +155,18 @@ button:hover {
     margin: 0;
 }
 
+/* AJUSTE PARA CONTROLAR O TAMANHO DA LISTA DE DEPOIMENTOS */
 #listaDepoimentos {
     margin-top: 1.5rem;
-    padding: 0 10px;
+    padding: 10px;
     width: 100%;
+    max-height: 400px;
+    /* Limita a altura do container */
+    overflow-y: auto;
+    /* Adiciona a barra de rolagem vertical */
+    border: 1px solid var(--accent-color);
+    border-radius: 12px;
+    background-color: #f7f7f7;
 }
 
 .depoimento-item {
@@ -167,6 +176,7 @@ button:hover {
     border-radius: 20px 20px 20px 4px;
     margin-bottom: 15px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    word-wrap: break-word;
 }
 
 .depoimento-meta {
@@ -185,10 +195,16 @@ body.alto-contraste {
 /* Adaptação para o Alto Contraste */
 body.alto-contraste .card,
 body.alto-contraste .area-texto-padrao,
-body.alto-contraste #inputDepoimento {
+body.alto-contraste #inputDepoimento,
+body.alto-contraste #listaDepoimentos {
     background: #444;
     color: yellow;
     border-color: yellow;
+}
+
+body.alto-contraste .depoimento-item {
+    background-color: #666;
+    color: yellow;
 }
 
 footer {
